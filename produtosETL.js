@@ -21,15 +21,16 @@ resgatarDados.on('end', () => {
   dadosResgatados = adicionarAspas;
 
   const identificarInicioDeLinha = dadosResgatados.map(
-    (linha) => (linha[0] = `/${linha[0]}`),
+    (linha) => (linha[0] = `\n/${linha[0]}`),
   );
 
   const dadosLimpos = dadosResgatados
     .toString()
     .replace('/', '')
-    .replaceAll(',/', '');
+    .replace('\n', '')
+    .replaceAll(',\n/', '\n');
 
   //
 
-  fs.writeFileSync(`./csv/produtos-limpos.csv`, dadosLimpos, 'utf8');
+  fs.writeFileSync(`./csv/produtos-limpos.csv`, dadosLimpos, 'utf-8');
 });
